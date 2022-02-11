@@ -12,8 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2022_02_11_191327) do
 
-# Could not dump table "posts" because of following StandardError
-#   Unknown type 'reference' for column 'user'
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "users_id"
+    t.index ["users_id"], name: "index_posts_on_users_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -29,4 +35,5 @@ ActiveRecord::Schema.define(version: 2022_02_11_191327) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "posts", "users", column: "users_id"
 end
