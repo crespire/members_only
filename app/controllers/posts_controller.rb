@@ -37,20 +37,16 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    auth_user = @post.user.id == current_user.id
+    return unless @post.user.id == current_user.id
 
-    if auth_user
-      respond_to do |format|
-        if @post.update(post_params)
-          format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
-          format.json { render :show, status: :ok, location: @post }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to :root, alert: 'Not authorized.'
     end
   end
 
