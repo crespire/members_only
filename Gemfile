@@ -6,13 +6,13 @@ ruby '3.0.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 
-#Specify sqlite3 for dev, pg for prod
+# Specify sqlite3 for dev, pg for prod
 group :development, :test do
- gem 'sqlite3', '~> 1.4', '>= 1.4.2'
+  gem 'sqlite3', '~> 1.4', '>= 1.4.2'
 end
 
 group :production do
-  gem 'pg', '~> 0.18.4'
+  gem 'pg'
 end
 
 # Use Puma as the app server
