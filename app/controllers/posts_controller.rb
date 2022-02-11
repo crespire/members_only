@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    redirect_to :root, alert: "Not authorized to edit another user's posts." unless @post.user.id == current_user.id
   end
 
   # POST /posts or /posts.json
@@ -57,7 +58,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to posts_url, notice: "Post was successfully removed." }
       format.json { head :no_content }
     end
   end
